@@ -3,48 +3,148 @@
   position: absolute;
   width: 100%;
   z-index: 2;
+  /* Fade the transparency in and out */
+  transition: background-color .3s ease-out;
+
+  /* What happens when the nav menu is expanded on mobile */
+  &--is-expanded {
+    background-color: rgba(47, 85, 114, .55);
+  }
   
   @mixin atMedium {
     background-color: rgba(47, 85, 114, .3);
   }
 
   &__btn-container {
-    float: right;
+    @mixin atMedium {
+      order: 2;
+    }
   }
 
   &__logo {
     position: absolute;
     top: 0;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%) scale(.8);
+    transform-origin: 50% 0;
     background-color: $mainBlue;
-    padding: 13px 29px;
+    padding: 25px 36px;
 
     @mixin atMedium {
       left: auto;
       transform: translateX(0);
-      padding: 25px 36px;
     }
   }
 
+  &__logo__graphic {
+    text-indent: -9999px;
+  }
+
+  /* Animated hamburger menu toggler */
   &__menu-icon {
     width: 20px;
-    height: 20px;
-    background-color: #FFF;
+    height: 19px;
     position: absolute;
+    /* Keep menu icon over mobile menu so it can be clicked */
+    z-index: 10;
     top: 10px;
     right: 10px;
+
+    &::before {
+      /* content "" makes sure the pseudo element appears */
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #FFF;
+      /* Set transform origin to top left corner so that corner stays in place when rotating animation */
+      transform-origin: 0 0;
+      /* Transition the transform property over .3sec using ease-out method */
+      transition: transform .3s ease-out;
+    }
+
+    &__middle {
+      position: absolute;
+      top: 8px;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #FFF;
+      /* Transition all properties over .3sec using ease-out method */
+      transition: all .3s ease-out;
+      /* Set transform origin to center left corner so that corner stays in place when rotating animation */
+      transform-origin: 0 50%;
+    }
+
+    &::after {
+      /* content "" makes sure the pseudo element appears */
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 20px;
+      height: 3px;
+      background-color: #FFF;
+      /* Set transform origin to bottom left corner so that corner stays in place when rotating animation */
+      transform-origin: 0 100%;
+      /* Transition the transform property over .3sec using ease-out method */
+      transition: transform .3s ease-out;
+    }
 
     @mixin atMedium {
       display: none;
     }
   }
 
+  /* Animate hamburger menu into X */
+  &__menu-icon--close-x {
+    &::before {
+      /* Rotate and scale X so only width changes */
+      transform: rotate(45deg) scaleX(1.25);
+    }
+
+    .site-header__menu-icon__middle {
+      /* Fade out effect for the middle bar */
+      opacity: 0;
+      /* Zoom out effect for the middle bar */
+      transform: scaleX(0);
+    }
+
+    &::after {
+      /* Rotate. Scale X so only width changes. Push it down a pixel on Y axis */
+      transform: rotate(-45deg) scaleX(1.25) translateY(1px);
+    }
+  }
+
   &__menu-content {
-    display: none;
+    /* Opacity instead of display:none allows for a nice blend in and out transition */
+    opacity: 0;
+    /* Transition all: opacity for fade in and out and transform for zoom effect */
+    transition: all .3s ease-out;
+    /* Add a zoom in and out effect by making it bigger when hidden */
+    transform: scale(1.2);
+    position: relative;
+    /* Because we are using opacity 0, this hides the content and keeps users from selecting it */
+    z-index: -10;
+    padding-top: 90px;
+    text-align: center;
 
     @mixin atMedium {
-      display: block;
+      display: flex;
+      justify-content: flex-end;
+      opacity: 1;
+      z-index: 1;
+      padding-top: 0;
+      /* Bring element to normal size after zoom */
+      transform: scale(1);
+    }
+
+    &--is-visible {
+      opacity: 1;
+      z-index: 1;
+      transform: scale(1);
     }
   }
 }
