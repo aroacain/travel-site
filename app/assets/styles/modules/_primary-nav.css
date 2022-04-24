@@ -42,6 +42,10 @@
       padding: 12px 0;
       /* Remove the blue background added for mobile */
       background-color: transparent;
+
+      &.is-current-link {
+        color: #fabb69;
+      }
     }
   }
 }
