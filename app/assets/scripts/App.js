@@ -5,6 +5,8 @@ import StickyHeader from './modules/StickyHeader';
 import ClientArea from './modules/ClientArea';
 import 'lazysizes';
 
+// Lambda client area
+new ClientArea()
 //Creating the mobile menu
 // No need to live in a variable because only loaded once and not related to other events
 new MobileMenu();
