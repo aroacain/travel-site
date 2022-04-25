@@ -2,6 +2,7 @@ import '../styles/styles.css';
 //Import blueprint for the mobile menu
 import MobileMenu from './modules/MobileMenu';
 import StickyHeader from './modules/StickyHeader';
+import 'lazysizes';
 
 //Creating the mobile menu
 // No need to live in a variable because only loaded once and not related to other events
