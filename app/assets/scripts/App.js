@@ -2,6 +2,7 @@ import '../styles/styles.css';
 //Import blueprint for the mobile menu
 import MobileMenu from './modules/MobileMenu';
 import StickyHeader from './modules/StickyHeader';
+import ClientArea from './modules/ClientArea';
 import 'lazysizes';
 
 //Creating the mobile menu
